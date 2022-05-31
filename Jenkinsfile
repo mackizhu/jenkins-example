@@ -33,7 +33,7 @@ pipeline {
         stage ('List S3 buckets') {
             steps {
                 withAWS(credentials:'aws-key',region:'us-east-1') {
-                    s3 ls
+                    sh 's3 ls'
                 }
             }
         }
