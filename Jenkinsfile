@@ -34,7 +34,7 @@ pipeline {
         
         stage ('List S3 buckets') {
             steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AKIA6FBAA42IGCMILCHO', passwordVariable: 'Kibm81ZCsuTxz9GF4ZtKQw/1c9nNEMGV/uLOPTiF']]) {
+                withAWS(credentials:'aws-key') {
                     AWS("--region=eu-east-1 s3 ls")
                 }
             }
