@@ -15,7 +15,7 @@ pipeline {
                 environment name: 'DEPLOY_TO', value: 'master'
             }
             steps {
-                echo 'Deploying ${DEPLOY_TO}'
+                echo 'Deploying ${params.DEPLOY_TO}'
             }
         }
     }
