@@ -1,32 +1,22 @@
 pipeline {
     agent any
-
     stages {
-        stage ('Compile Stage') {
-
+        stage('Example Build') {
             steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn clean compile'
-                }
+                echo 'Hello World'
             }
         }
-
-        stage ('Testing Stage') {
-
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn test'
+        stage('Example Deploy') {
+            when {
+                expression { BRANCH_NAME ==~ /(master|staging)/ }
+                anyOf {
+                    environment name: 'DEPLOY_TO', value: 'master'
+                    environment name: 'DEPLOY_TO', value: 'staging'
                 }
             }
-        }
-
-
-        stage ('Deployment Stage') {
             steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    echo 'mvn deploy'
-                }
-            }   
+                echo 'Deploying'
+            }
         }
     }
 }
