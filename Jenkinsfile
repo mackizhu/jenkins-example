@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment { 
+        DEPLOY_TO = 'master'
+    }
     stages {
         stage('Example Build') {
             steps {
